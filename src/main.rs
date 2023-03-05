@@ -1,11 +1,15 @@
-fn unique<T: std::cmp::Ord> (mut a: Vec<T>) -> Vec<T> {
+fn unique<T: std::cmp::Ord> (a: Vec<T>) -> Vec<T> {
     if a.is_empty() {
         return a;
     }
     
-    a.sort();
-    a.dedup();
-    a
+    let mut unique_vec: Vec<T> = vec![];
+    for el in a.into_iter() {
+        if !unique_vec.contains(&el) {
+            unique_vec.push(el);
+        }
+    }
+    unique_vec
 }
 
 // advanced 1: use generic types
