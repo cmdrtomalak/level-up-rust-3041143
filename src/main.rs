@@ -1,5 +1,11 @@
-fn unique(a: Vec<i32>) -> Vec<i32> {
-    todo!()
+fn unique(mut a: Vec<i32>) -> Vec<i32> {
+    if a.is_empty() {
+        return a;
+    }
+    
+    a.sort();
+    a.dedup();
+    a
 }
 
 // advanced 1: use generic types
