@@ -1,4 +1,4 @@
-fn unique(mut a: Vec<i32>) -> Vec<i32> {
+fn unique<T: std::cmp::Ord> (mut a: Vec<T>) -> Vec<T> {
     if a.is_empty() {
         return a;
     }
@@ -31,8 +31,8 @@ fn main() {
 
 #[test]
 fn empty_list() {
-    let input = vec![];
-    let expected_output = vec![];
+    let input: Vec<i32> = vec![];
+    let expected_output: Vec<i32> = vec![];
     let actual_output = unique(input);
     assert_eq!(actual_output, expected_output);
 }
