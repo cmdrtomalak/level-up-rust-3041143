@@ -1,15 +1,5 @@
-trait ToUpper {
-    fn my_uppercase(&self) -> String;
-}
-
-impl ToUpper for &str {
-    fn my_uppercase(&self) -> String {
-        self.to_uppercase()
-    }
-}
-
-fn sort_usernames<T: AsRef<str> + PartialOrd + ToUpper>(usernames: &mut Vec<T>) {
-    usernames.sort_by(|a, b| a.my_uppercase().partial_cmp(&b.my_uppercase()).unwrap());
+fn sort_usernames<T: AsRef<str>>(usernames: &mut Vec<T>) {
+    usernames.sort_by(|a, b| a.as_ref().to_uppercase().partial_cmp(&b.as_ref().to_uppercase()).unwrap());
 }
 
 fn main() {
