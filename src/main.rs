@@ -1,5 +1,7 @@
-fn info<T: std::fmt::Display>(a: &T) {
-    println!("{}", a);
+use std::ffi::CString;
+
+fn info<T: std::fmt::Debug>(a: &T) {
+    println!("{:?}", a);
 }
 
 fn main() {
@@ -11,8 +13,8 @@ fn main() {
     // Advanced 1
     // use std::ffi::CString;
     
-    // let c = CString::new("?").unwrap();
-    // info(&input);
+    let c = CString::new("?").unwrap();
+    info(&c);
 
     // Advanced 2
     // use std::path::Path;
@@ -39,12 +41,12 @@ fn string() {
 //     info(&input);
 // }
 
-// #[test]
-// fn cstring() {
-//     use std::ffi::{CString};
-//     let input = CString::new("Rust").unwrap();
-//     info(&input);
-// }
+#[test]
+fn cstring() {
+    use std::ffi::{CString};
+    let input = CString::new("Rust").unwrap();
+    info(&input);
+}
 
 // #[test]
 // fn path() {
