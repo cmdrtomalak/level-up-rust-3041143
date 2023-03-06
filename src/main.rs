@@ -1,5 +1,5 @@
-fn info(a: &T) {
-    todo!();
+fn info<T: std::fmt::Display>(a: &T) {
+    println!("{}", a);
 }
 
 fn main() {
