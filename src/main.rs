@@ -32,8 +32,30 @@ impl Hand {
     }
 
     fn value(&self) -> usize {
-        // TODO: implement this method
-        0 
+        let mut t_val = 0;
+
+        for card in self.cards.iter() {
+            use Card::*;
+
+            let val = match card {
+                Two => 2,
+                Three => 3,
+                Four => 4,
+                Five => 5,
+                Six => 6,
+                Seven => 7,
+                Eight => 8,
+                Nine => 9,
+                Jack | Queen | King => 10,
+                Ace if t_val + 11 > 21 => 1,
+                Ace if t_val + 11 <= 21 => 11,
+                _ => continue,
+            };
+
+            t_val += val;
+        }
+
+        t_val
     }
 
     fn is_loosing_hand(&self) -> bool {
