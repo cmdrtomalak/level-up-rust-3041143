@@ -16,11 +16,12 @@ trait MorseCode {
 
 impl MorseCode for String {
     fn to_morse_code(&self) -> Message {
-        use Pulse::*;
+        let mut msg = vec![];
 
-        let mut msg = Vec::with_capacity(self.len());
         for c in self.chars() {
-            let letter = match c {
+            use Pulse::*;
+
+            let lt = match c {
                 'A' | 'a' => vec![Short, Long],
                 'B' | 'b' => vec![Long, Short, Short, Short],
                 'C' | 'c' => vec![Long, Short, Long, Short],
@@ -58,10 +59,11 @@ impl MorseCode for String {
                 '8' => vec![Long, Long, Long, Short, Short],
                 '9' => vec![Long, Long, Long, Long, Short],
                 '0' => vec![Long, Long, Long, Long, Long],
-                _ => continue,
+
+                _=> continue,
             };
 
-            msg.push(letter);
+            msg.push(lt);
         }
         msg
     }
