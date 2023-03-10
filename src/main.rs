@@ -30,17 +30,7 @@ impl FromStr for Isbn {
         }
 
         // checksum
-        let mut chk: Vec<u8> = Vec::with_capacity(digits.len());
-        for i in 0..12 {
-            if i % 2 == 0 {
-                chk.push(digits[i] * 1);
-            } else {
-                chk.push(digits[i] * 3);
-            }
-        }
-
-        let checksum: u8 = chk.iter().sum();
-        let chk_digit = checksum % 10;
+        let chk_digit = calculate_check_digit(&digits);
 
         if digits[12] != chk_digit {
             return Err(IsbnError::FailedChecksum);
@@ -72,7 +62,8 @@ fn calculate_check_digit(digits: &[u8]) -> u8 {
     }
 
     let checksum: u8 = chk.iter().sum();
-    checksum % 10
+    let check_digit = (10 - (checksum % 10)) % 10;
+    check_digit
 }
 
 fn main() {
