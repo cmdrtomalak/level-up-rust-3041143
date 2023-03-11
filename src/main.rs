@@ -1,4 +1,6 @@
 use std::path;
+use std::os::unix::fs::PermissionsExt;
+use libc;
 
 trait FileMetadata {
     fn exists(&self) -> bool;
@@ -10,15 +12,23 @@ trait FileMetadata {
 
 impl FileMetadata for path::Path {
     fn is_readable(&self) -> bool {
-        todo!();
+        let meta = self.metadata().unwrap().permissions();
+        let mode = meta.mode();
+
+        // Check if any read bit is set
+        mode & (libc::S_IRUSR | libc::S_IRGRP | libc::S_IROTH) != 0
     }
 
     fn is_writeable(&self) -> bool {
-        todo!();
+        let meta = self.metadata().unwrap().permissions();
+        let mode = meta.mode();
+
+        // Check if any write bit is set
+        mode & (libc::S_IWUSR | libc::S_IWGRP | libc::S_IWOTH) != 0
     }
 
     fn exists(&self) -> bool {
-        todo!();
+        self.exists()
     }
 }
 
