@@ -28,7 +28,7 @@ fn flexible_date_parse(text: &str) -> Option<NaiveDate> {
         return Some(date);
     }
 
-        if let Ok(date) = NaiveDate::parse_from_str(&input, "%Y-%m+-%d") {
+    if let Ok(date) = NaiveDate::parse_from_str(&input, "%Y-%m+-%d") {
         return Some(date);
     }
 
